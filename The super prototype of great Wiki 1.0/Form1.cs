@@ -19,12 +19,22 @@ using System.Windows.Forms;
         private TextBox ExampleTextBox;
         private TextBox NameTextBox;
         private Label LabelName;
-        private ListView listView1;
+        private ListView ListViewDefinitions;
+        private ColumnHeader name;
+        private ColumnHeader category;
         private string[,] definitionsArray = new string[rows, columns];
 
         public Form1()
         {
             InitializeComponent();
+        }
+
+        public void Clear()
+        {
+            NameTextBox.Clear();
+            CategoryTextBox.Clear();
+            DescriptionTextBox.Clear();
+            ExampleTextBox.Clear();
         }
 
         public int BinarySearch(string searchTerm)
@@ -102,6 +112,10 @@ using System.Windows.Forms;
             return -1; // Name not found
         }
 
+        private void display()
+        {
+            //TO DO: add method to display in ListViewDefinitions
+        }
         private void AddButton_Click(object sender, EventArgs e)
         {
             string name = NameTextBox.Text;
@@ -124,10 +138,7 @@ using System.Windows.Forms;
             definitionsArray[rowIndex, 3] = example;
 
             // Clear the input fields
-            NameTextBox.Text = "";
-            CategoryTextBox.Text = "";
-            DescriptionTextBox.Text = "";
-            ExampleTextBox.Text = "";
+            Clear();
 
             MessageBox.Show("Definition added successfully.");
         }
@@ -155,10 +166,7 @@ using System.Windows.Forms;
             definitionsArray[rowIndex, 3] = newExample;
 
             // Clear the input fields
-            NameTextBox.Text = "";
-            CategoryTextBox.Text = "";
-            DescriptionTextBox.Text = "";
-            ExampleTextBox.Text = "";
+            Clear();
 
             MessageBox.Show("Definition updated successfully.");
         }
@@ -178,10 +186,7 @@ using System.Windows.Forms;
                     }
 
                     // Clear the input fields
-                    NameTextBox.Text = "";
-                    CategoryTextBox.Text = "";
-                    DescriptionTextBox.Text = "";
-                    ExampleTextBox.Text = "";
+                    Clear();
 
                     MessageBox.Show("Definition deleted successfully.");
                     return;
@@ -194,10 +199,7 @@ using System.Windows.Forms;
         private void ClearButton_Click(object sender, EventArgs e)
         {
             // Clear the input fields
-            NameTextBox.Text = "";
-            CategoryTextBox.Text = "";
-            DescriptionTextBox.Text = "";
-            ExampleTextBox.Text = "";
+            Clear();
         }
 
         private void SortButton_Click(object sender, EventArgs e)
@@ -209,6 +211,7 @@ using System.Windows.Forms;
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
+            //fix this later to search from a new Search Textbox
             string nameToSearch = NameTextBox.Text;
 
             int rowIndex = FindRowIndexByName(nameToSearch);
@@ -223,9 +226,7 @@ using System.Windows.Forms;
             else
             {
                 // Clear the input fields
-                CategoryTextBox.Text = "";
-                DescriptionTextBox.Text = "";
-                ExampleTextBox.Text = "";
+                Clear();
 
                 MessageBox.Show("Definition not found.");
             }
@@ -255,7 +256,9 @@ using System.Windows.Forms;
             this.ExampleTextBox = new System.Windows.Forms.TextBox();
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.LabelName = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.ListViewDefinitions = new System.Windows.Forms.ListView();
+            this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.category = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // CategoryTextBox
@@ -295,24 +298,38 @@ using System.Windows.Forms;
             this.LabelName.TabIndex = 4;
             this.LabelName.Text = "Name";
             // 
-            // listView1
+            // ListViewDefinitions
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(595, 103);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(203, 171);
-            this.listView1.TabIndex = 5;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.ListViewDefinitions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.name,
+            this.category});
+            this.ListViewDefinitions.HideSelection = false;
+            this.ListViewDefinitions.Location = new System.Drawing.Point(595, 103);
+            this.ListViewDefinitions.Name = "ListViewDefinitions";
+            this.ListViewDefinitions.Size = new System.Drawing.Size(203, 171);
+            this.ListViewDefinitions.TabIndex = 5;
+            this.ListViewDefinitions.UseCompatibleStateImageBehavior = false;
+            this.ListViewDefinitions.View = System.Windows.Forms.View.Details;
+            // 
+            // name
+            // 
+            this.name.Text = "Name";
+            this.name.Width = 72;
+            // 
+            // category
+            // 
+            this.category.Text = "Category";
+            this.category.Width = 85;
             // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(889, 458);
-            this.Controls.Add(this.listView1);
             this.Controls.Add(this.LabelName);
             this.Controls.Add(this.NameTextBox);
             this.Controls.Add(this.ExampleTextBox);
             this.Controls.Add(this.DescriptionTextBox);
             this.Controls.Add(this.CategoryTextBox);
+            this.Controls.Add(this.ListViewDefinitions);
             this.Name = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
