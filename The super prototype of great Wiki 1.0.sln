@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "The super prototype of great Wiki 1.0", "The super prototype of great Wiki 1.0\The super prototype of great Wiki 1.0.csproj", "{87FE6C82-14F0-498C-935B-FCFC10559935}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87FE6C82-14F0-498C-935B-FCFC10559935}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87FE6C82-14F0-498C-935B-FCFC10559935}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87FE6C82-14F0-498C-935B-FCFC10559935}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87FE6C82-14F0-498C-935B-FCFC10559935}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E7552B29-8D3B-452C-ABD9-1D9D5641B87A}
+	EndGlobalSection
+EndGlobal
