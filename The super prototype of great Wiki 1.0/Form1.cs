@@ -19,6 +19,7 @@ using System.Windows.Forms;
         private TextBox ExampleTextBox;
         private TextBox NameTextBox;
         private Label LabelName;
+        private ListView listView1;
         private string[,] definitionsArray = new string[rows, columns];
 
         public Form1()
@@ -254,6 +255,7 @@ using System.Windows.Forms;
             this.ExampleTextBox = new System.Windows.Forms.TextBox();
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.LabelName = new System.Windows.Forms.Label();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // CategoryTextBox
@@ -293,9 +295,19 @@ using System.Windows.Forms;
             this.LabelName.TabIndex = 4;
             this.LabelName.Text = "Name";
             // 
+            // listView1
+            // 
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(595, 103);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(203, 171);
+            this.listView1.TabIndex = 5;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(889, 458);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.LabelName);
             this.Controls.Add(this.NameTextBox);
             this.Controls.Add(this.ExampleTextBox);
