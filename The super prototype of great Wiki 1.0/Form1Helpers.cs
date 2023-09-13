@@ -45,71 +45,71 @@ internal static class Form1Helpers
         // Implement loading definitions from a binary file
     }
 
-    static void Main(string[] args)
-    {
-        bool exit = false;
+    //static void Main(string[] args)
+    //{
+    //    bool exit = false;
 
-        while (!exit)
-        {
-            Console.WriteLine("Dictionary Management App");
-            Console.WriteLine("1. Add Definition");
-            Console.WriteLine("2. Edit Definition");
-            Console.WriteLine("3. Delete Definition");
-            Console.WriteLine("4. Clear Fields");
-            Console.WriteLine("5. Sort Definitions");
-            Console.WriteLine("6. Search Definition");
-            Console.WriteLine("7. Display Definitions");
-            Console.WriteLine("8. Load Definitions from File");
-            Console.WriteLine("9. Save Definitions to File");
-            Console.WriteLine("10. Exit");
-            Console.Write("Select an option (1-10): ");
+    //    while (!exit)
+    //    {
+    //        Console.WriteLine("Dictionary Management App");
+    //        Console.WriteLine("1. Add Definition");
+    //        Console.WriteLine("2. Edit Definition");
+    //        Console.WriteLine("3. Delete Definition");
+    //        Console.WriteLine("4. Clear Fields");
+    //        Console.WriteLine("5. Sort Definitions");
+    //        Console.WriteLine("6. Search Definition");
+    //        Console.WriteLine("7. Display Definitions");
+    //        Console.WriteLine("8. Load Definitions from File");
+    //        Console.WriteLine("9. Save Definitions to File");
+    //        Console.WriteLine("10. Exit");
+    //        Console.Write("Select an option (1-10): ");
 
-            int choice;
-            if (int.TryParse(Console.ReadLine(), out choice))
-            {
-                switch (choice)
-                {
-                    case 1:
-                        AddDefinition();
-                        break;
-                    case 2:
-                        EditDefinition();
-                        break;
-                    case 3:
-                        DeleteDefinition();
-                        break;
-                    case 4:
-                        ClearFields();
-                        break;
-                    case 5:
-                        SortDefinitions();
-                        break;
-                    case 6:
-                        SearchDefinition();
-                        break;
-                    case 7:
-                        DisplayDefinitions();
-                        break;
-                    case 8:
-                        LoadDefinitionsFromFile();
-                        break;
-                    case 9:
-                        SaveDefinitionsToFile();
-                        break;
-                    case 10:
-                        exit = true;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid option. Please try again.");
-                        break;
-                }
-            }
-            else
-            {
-                Console.WriteLine("Invalid input. Please enter a number.");
-            }
-        }
-    }
+    //        int choice;
+    //        if (int.TryParse(Console.ReadLine(), out choice))
+    //        {
+    //            switch (choice)
+    //            {
+    //                case 1:
+    //                    AddDefinition();
+    //                    break;
+    //                case 2:
+    //                    EditDefinition();
+    //                    break;
+    //                case 3:
+    //                    DeleteDefinition();
+    //                    break;
+    //                case 4:
+    //                    ClearFields();
+    //                    break;
+    //                case 5:
+    //                    SortDefinitions();
+    //                    break;
+    //                case 6:
+    //                    SearchDefinition();
+    //                    break;
+    //                case 7:
+    //                    DisplayDefinitions();
+    //                    break;
+    //                case 8:
+    //                    LoadDefinitionsFromFile();
+    //                    break;
+    //                case 9:
+    //                    SaveDefinitionsToFile();
+    //                    break;
+    //                case 10:
+    //                    exit = true;
+    //                    break;
+    //                default:
+    //                    Console.WriteLine("Invalid option. Please try again.");
+    //                    break;
+    //            }
+    //        }
+    //        else
+    //        {
+    //            Console.WriteLine("Invalid input. Please enter a number.");
+    //        }
+    //    }
+    //}
 
     // 9.10: Create a SAVE button so the information from the 2D array can be written into a binary file
     static void SaveDefinitionsToFile()
