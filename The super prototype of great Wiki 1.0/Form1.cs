@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+ * Hon Yin Ian Choy
+ * 30066573
+ * Assessment Task One 
+ * C sharp 
+ */
+
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,16 +17,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+  
     namespace The_super_prototype_of_great_Wiki_1._0
     {
-        public partial class Form1 : Form
+
+    //code for definitionsArray (9.1) 
+    public partial class Form1 : Form
         {
         private static readonly int rows = 12;
         private static readonly int columns = 4;
         private TextBox CategoryTextBox;
         private TextBox DescriptionTextBox;
-        private TextBox ExampleTextBox;
+        private TextBox StructureTextBox;
         private TextBox NameTextBox;
         private Label LabelName;
         private ListView ListViewDefinitions;
@@ -49,18 +60,21 @@ using System.Windows.Forms;
             NameTextBox.Clear();
             CategoryTextBox.Clear();
             DescriptionTextBox.Clear();
-            ExampleTextBox.Clear();
+            StructureTextBox.Clear();
         }
+
+
 
         public int BinarySearch(string searchTerm)
         {
-            int left = 0, right = definitionsArray.Length - 1;
+            Sort();
+            int left = 0, right = rows - 1;
 
             while (left <= right)
             {
                 int middle = (left + right) / 2;
 
-                int comparisonResult = String.Compare(definitionsArray[middle, 0], searchTerm);
+                int comparisonResult = String.Compare(definitionsArray[middle, 0], searchTerm, StringComparison.OrdinalIgnoreCase);
 
                 if (comparisonResult == 0)
                 {
@@ -82,9 +96,9 @@ using System.Windows.Forms;
         
         public void Sort()
         {
-            for (int i = 0; i < definitionsArray.Length - 1; i++)
+            for (int i = 0; i < rows - 1; i++)
             {
-                for (int j = i + 1; j < definitionsArray.Length; j++)
+                for (int j = i + 1; j < rows; j++)
                 {
                     if (String.Compare(definitionsArray[i, 0], definitionsArray[j, 0]) > 0)
                     {
@@ -93,6 +107,8 @@ using System.Windows.Forms;
                 }
             }
         }
+
+
 
         private int FindEmptyRow()
         {
@@ -104,18 +120,6 @@ using System.Windows.Forms;
                 }
             }
             return -1; // No empty row found
-        }
-
-        private int FindRowIndexByName(string nameToFind)
-        {
-            for (int row = 0; row < rows; row++)
-            {
-                if (definitionsArray[row, 0] == nameToFind)
-                {
-                    return row;
-                }
-            }
-            return -1; // Name not found
         }
 
         private void Display()
@@ -141,12 +145,13 @@ using System.Windows.Forms;
             }
         }
 
+        // Code for adding a definition (9.2)
         private void Add_Click_1(object sender, EventArgs e)
         {
             string name = NameTextBox.Text;
             string category = CategoryTextBox.Text;
             string description = DescriptionTextBox.Text;
-            string example = ExampleTextBox.Text;
+            string example = StructureTextBox.Text;
 
             // Find an empty slot in the array to store the definition
             int rowIndex = FindEmptyRow();
@@ -167,12 +172,14 @@ using System.Windows.Forms;
 
             MessageBox.Show("Definition added successfully.");
         }
+
+        // Code for editing a definition (9.3)
         private void EditButton_Click_1(object sender, EventArgs e)
         {
             string nameToEdit = NameTextBox.Text;
 
             // Find the index of the definition with the matching Name
-            int rowIndex = FindRowIndexByName(nameToEdit);
+            int rowIndex = BinarySearch(nameToEdit);
 
             if (rowIndex == -1)
             {
@@ -182,7 +189,7 @@ using System.Windows.Forms;
 
             string newCategory = CategoryTextBox.Text;
             string newDescription = DescriptionTextBox.Text;
-            string newExample = ExampleTextBox.Text;
+            string newExample = StructureTextBox.Text;
 
             // Update the definition in the array
             definitionsArray[rowIndex, 1] = newCategory;
@@ -195,6 +202,7 @@ using System.Windows.Forms;
             MessageBox.Show("Definition updated successfully.");
         }
 
+        // Code for deleting a definition (9.4)
         private void DeleteButton_Click_1(object sender, EventArgs e)
         {
             string nameToDelete = NameTextBox.Text;
@@ -220,12 +228,14 @@ using System.Windows.Forms;
             MessageBox.Show("Definition not found.");
         }
 
+        // Code for clearing input fields (9.5)
         private void ClearButton_Click_1(object sender, EventArgs e)
         {
             // Clear the input fields
             Clear();
         }
 
+        // Code for sorting definitions (9.6)
         private void SortButton_Click_1(object sender, EventArgs e)
         {
             // Call the Sort method to sort the definitionsArray
@@ -246,29 +256,30 @@ using System.Windows.Forms;
             }
         }
 
+        // Code for searching for a definition (9.7)
         private void SearchButton_Click_1(object sender, EventArgs e)
         {
-            //fix this later to search from a new Search Textbox
             string nameToSearch = NameTextBox.Text;
 
-            int rowIndex = FindRowIndexByName(nameToSearch);
+            int rowIndex = BinarySearch(nameToSearch);
 
             if (rowIndex != -1)
             {
-                // Display the found definition in the input fields
                 CategoryTextBox.Text = definitionsArray[rowIndex, 1];
                 DescriptionTextBox.Text = definitionsArray[rowIndex, 2];
-                ExampleTextBox.Text = definitionsArray[rowIndex, 3];
+                StructureTextBox.Text = definitionsArray[rowIndex, 3];
             }
             else
             {
-                // Clear the input fields
                 Clear();
-
                 MessageBox.Show("Definition not found.");
             }
+
         }
 
+
+
+        // Code for displaying definitions (9.8)
         private void DisplayButton_Click_1(object sender, EventArgs e)
         {
             // Clear existing items in the ListView
@@ -291,6 +302,7 @@ using System.Windows.Forms;
             }
         }
 
+        // Code for loading definitions from a file (9.11)
         private void LoadButton_Click_1(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -334,19 +346,76 @@ using System.Windows.Forms;
                 }
             }
         }
-        
 
+        // Code for saving definitions to a file (9.10)
         private void SaveButton_Click_1(object sender, EventArgs e)
         {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Binary Files|*.dat|All Files|*.*";
 
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog.FileName;
+
+                try
+                {
+                    using (BinaryWriter writer = new BinaryWriter(File.Open(filePath, FileMode.Create)))
+                    {
+                        // Write the number of rows and columns to the file
+                        writer.Write(rows);
+                        writer.Write(columns);
+
+                        // Write the definitions data from the definitionsArray to the file
+                        for (int row = 0; row < rows; row++)
+                        {
+                            for (int col = 0; col < columns; col++)
+                            {
+                                writer.Write(definitionsArray[row, col]);
+                            }
+                        }
+
+                        // Display a success message
+                        MessageBox.Show("Definitions saved successfully.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error saving definitions: " + ex.Message);
+                }
+            }
         }
+
+        //code for set up an event handler ListViewDefinitions_SelectedIndexChanged for the SelectedIndexChanged event of the listViewDefinitions.
+        //When an item in the ListView is selected, its data gets displayed in the appropriate TextBoxes.
+        private void ListViewDefinitions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Check if an item is selected
+            if (ListViewDefinitions.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = ListViewDefinitions.SelectedItems[0];
+
+                // Assuming the Name is in the first column, Category in the second, and so on
+                NameTextBox.Text = selectedItem.SubItems[0].Text;
+                CategoryTextBox.Text = selectedItem.SubItems[1].Text;
+
+                // Search the definitionsArray to find and populate the Description and Example
+                int rowIndex = BinarySearch(NameTextBox.Text);
+                if (rowIndex != -1)
+                {
+                    DescriptionTextBox.Text = definitionsArray[rowIndex, 2];
+                    StructureTextBox.Text = definitionsArray[rowIndex, 3];
+                }
+            }
+        }
+
+
 
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
             this.CategoryTextBox = new System.Windows.Forms.TextBox();
             this.DescriptionTextBox = new System.Windows.Forms.TextBox();
-            this.ExampleTextBox = new System.Windows.Forms.TextBox();
+            this.StructureTextBox = new System.Windows.Forms.TextBox();
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.LabelName = new System.Windows.Forms.Label();
             this.ListViewDefinitions = new System.Windows.Forms.ListView();
@@ -369,28 +438,28 @@ using System.Windows.Forms;
             // 
             // CategoryTextBox
             // 
-            this.CategoryTextBox.Location = new System.Drawing.Point(360, 86);
+            this.CategoryTextBox.Location = new System.Drawing.Point(119, 148);
             this.CategoryTextBox.Name = "CategoryTextBox";
             this.CategoryTextBox.Size = new System.Drawing.Size(100, 22);
             this.CategoryTextBox.TabIndex = 0;
             // 
             // DescriptionTextBox
             // 
-            this.DescriptionTextBox.Location = new System.Drawing.Point(360, 147);
+            this.DescriptionTextBox.Location = new System.Drawing.Point(119, 282);
             this.DescriptionTextBox.Name = "DescriptionTextBox";
             this.DescriptionTextBox.Size = new System.Drawing.Size(100, 22);
             this.DescriptionTextBox.TabIndex = 1;
             // 
-            // ExampleTextBox
+            // StructureTextBox
             // 
-            this.ExampleTextBox.Location = new System.Drawing.Point(360, 212);
-            this.ExampleTextBox.Name = "ExampleTextBox";
-            this.ExampleTextBox.Size = new System.Drawing.Size(100, 22);
-            this.ExampleTextBox.TabIndex = 2;
+            this.StructureTextBox.Location = new System.Drawing.Point(119, 219);
+            this.StructureTextBox.Name = "StructureTextBox";
+            this.StructureTextBox.Size = new System.Drawing.Size(100, 22);
+            this.StructureTextBox.TabIndex = 2;
             // 
             // NameTextBox
             // 
-            this.NameTextBox.Location = new System.Drawing.Point(360, 276);
+            this.NameTextBox.Location = new System.Drawing.Point(119, 85);
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(100, 22);
             this.NameTextBox.TabIndex = 3;
@@ -398,7 +467,7 @@ using System.Windows.Forms;
             // LabelName
             // 
             this.LabelName.AutoSize = true;
-            this.LabelName.Location = new System.Drawing.Point(49, 85);
+            this.LabelName.Location = new System.Drawing.Point(33, 85);
             this.LabelName.Name = "LabelName";
             this.LabelName.Size = new System.Drawing.Size(44, 16);
             this.LabelName.TabIndex = 4;
@@ -416,6 +485,7 @@ using System.Windows.Forms;
             this.ListViewDefinitions.TabIndex = 5;
             this.ListViewDefinitions.UseCompatibleStateImageBehavior = false;
             this.ListViewDefinitions.View = System.Windows.Forms.View.Details;
+            this.ListViewDefinitions.SelectedIndexChanged += new System.EventHandler(this.ListViewDefinitions_SelectedIndexChanged);
             // 
             // name
             // 
@@ -429,7 +499,7 @@ using System.Windows.Forms;
             // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(144, 85);
+            this.AddButton.Location = new System.Drawing.Point(337, 85);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(75, 23);
             this.AddButton.TabIndex = 6;
@@ -439,7 +509,7 @@ using System.Windows.Forms;
             // 
             // EditButton
             // 
-            this.EditButton.Location = new System.Drawing.Point(144, 147);
+            this.EditButton.Location = new System.Drawing.Point(337, 147);
             this.EditButton.Name = "EditButton";
             this.EditButton.Size = new System.Drawing.Size(75, 23);
             this.EditButton.TabIndex = 7;
@@ -449,7 +519,7 @@ using System.Windows.Forms;
             // 
             // DeleteButton
             // 
-            this.DeleteButton.Location = new System.Drawing.Point(144, 211);
+            this.DeleteButton.Location = new System.Drawing.Point(337, 218);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(75, 23);
             this.DeleteButton.TabIndex = 8;
@@ -459,7 +529,7 @@ using System.Windows.Forms;
             // 
             // ClearButton
             // 
-            this.ClearButton.Location = new System.Drawing.Point(144, 276);
+            this.ClearButton.Location = new System.Drawing.Point(242, 282);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(75, 23);
             this.ClearButton.TabIndex = 9;
@@ -470,33 +540,35 @@ using System.Windows.Forms;
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(49, 153);
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(24, 154);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 16);
+            this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label1.Size = new System.Drawing.Size(62, 16);
             this.label1.TabIndex = 10;
-            this.label1.Text = "label1";
+            this.label1.Text = "Category";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(52, 218);
+            this.label2.Location = new System.Drawing.Point(25, 225);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 16);
+            this.label2.Size = new System.Drawing.Size(62, 16);
             this.label2.TabIndex = 11;
-            this.label2.Text = "label2";
+            this.label2.Text = "Structure ";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(52, 282);
+            this.label3.Location = new System.Drawing.Point(18, 282);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 16);
+            this.label3.Size = new System.Drawing.Size(75, 16);
             this.label3.TabIndex = 12;
-            this.label3.Text = "label3";
+            this.label3.Text = "Description";
             // 
             // SortButton
             // 
-            this.SortButton.Location = new System.Drawing.Point(144, 335);
+            this.SortButton.Location = new System.Drawing.Point(337, 282);
             this.SortButton.Name = "SortButton";
             this.SortButton.Size = new System.Drawing.Size(75, 23);
             this.SortButton.TabIndex = 13;
@@ -506,7 +578,7 @@ using System.Windows.Forms;
             // 
             // SearchButton
             // 
-            this.SearchButton.Location = new System.Drawing.Point(144, 391);
+            this.SearchButton.Location = new System.Drawing.Point(242, 347);
             this.SearchButton.Name = "SearchButton";
             this.SearchButton.Size = new System.Drawing.Size(75, 23);
             this.SearchButton.TabIndex = 14;
@@ -536,7 +608,7 @@ using System.Windows.Forms;
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(242, 210);
+            this.SaveButton.Location = new System.Drawing.Point(242, 218);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 17;
@@ -561,7 +633,7 @@ using System.Windows.Forms;
             this.Controls.Add(this.AddButton);
             this.Controls.Add(this.LabelName);
             this.Controls.Add(this.NameTextBox);
-            this.Controls.Add(this.ExampleTextBox);
+            this.Controls.Add(this.StructureTextBox);
             this.Controls.Add(this.DescriptionTextBox);
             this.Controls.Add(this.CategoryTextBox);
             this.Controls.Add(this.ListViewDefinitions);
@@ -571,6 +643,6 @@ using System.Windows.Forms;
 
         }
 
-        
+
     }
     }
