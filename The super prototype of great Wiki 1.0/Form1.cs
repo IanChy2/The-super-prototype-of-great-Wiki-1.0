@@ -54,6 +54,21 @@ using System.Windows.Forms;
         {
             InitializeComponent();
         }
+        private string[,] DefinitionsArray =
+       {
+            {"Array", "Array", "Linear", "An array data structure is made up of a set of elements (values or variables), each of which is identifiable by at least one array index or key. A mathematical method is used to determine the location of each element from its index tuple in an array."},
+            {"Two Dimension Array", "", "Linear", "A two-dimensional array may be represented graphically as a grid (or table) with rows and columns. Positions in a two-dimensional array are referenced using horizontal and vertical reference numbers, much like a map. They are also known as matrices."},
+            {"List", "List", "Linear", "A list or sequence is an abstract data type that represents a limited number of ordered items in which the same value may appear several times."},
+            {"Linked list", "", "Linear", "A linked list is a linear collection of data components whose order is determined by their physical location in memory rather than their physical order. Instead, each piece refers to the one before it. It is a data structure made up of a collection of nodes that represent a sequence."},
+            {"Self-Balance Tree", "Tree", "Non-Linear", "Any node-based binary search tree that automatically maintains its height (the maximum number of levels below the root) short in the face of arbitrary item insertions and deletions is referred to as a self-balancing tree."},
+            {"Heap", "", "Non-Linear", "A heap is a customized tree-based data structure that is basically a nearly full tree with the heap property satisfied. The heap is one of the most efficient implementations of an abstract data type known as a priority queue; priority queues are sometimes referred to as \"heaps.\""},
+            {"Binary Search Tree", "", "Non-Linear", "A binary search tree (BST), also known as an ordered or sorted binary tree, is a rooted binary tree data structure in which each internal node stores a key that is higher than all values in the node's left subtree but less than all keys in the node's right subtree."},
+            {"Graph", "Graphs", "Non-Linear", "A graph data structure is made up of a finite set of vertices and a set of unordered pairs of these vertices for an undirected graph or a set of ordered pairs for a directed graph in order to implement the undirected graph and directed graph concepts from the field of graph theory in mathematics."},
+            {"Set", "Abstract", "Non-Linear", "A set is an abstract data type that may hold distinct items in any order. It is a computer-implemented mathematical notion known as a finite set. Unlike most other collection types, instead of getting a particular element from a set, a value is normally tested for set membership."},
+            {"Queue", "", "Linear", "A queue is a collection of entities that are maintained in a sequence and can be modified by the addition of entities at one end of the sequence and the removal of entities from the other end of the sequence."},
+            {"Stack", "", "Linear", "A stack is a collection of items that are maintained in a sequence and can be modified by the addition of entities at one end of the sequence and the removal of entities from the other end."},
+            {"Hash Table", "Hash", "Non-Linear", "A hash table is a data structure that implements the associative array abstract data type, which allows it to map keys to values. A hash table employs a hash function to generate an index, also known as a hash code, into an array of buckets or slots from which the necessary item may be extracted."}
+        };
 
         public void Clear()
         {
